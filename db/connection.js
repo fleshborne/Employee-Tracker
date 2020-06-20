@@ -1,6 +1,7 @@
-// require mysql
+// Dependencies here
 const mysql = require("mysql");
-// require dotenv
+const inquirer = require("inquirer");
+const consoleTable = require("console.table");
 require("dotenv").config();
 
 const connection = mysql.createConnection({
