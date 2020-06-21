@@ -40,4 +40,13 @@ class Database {
       // SELECT query here
       ();
   }
+  updateRole() {
+    return this.connection.query();
+  }
+  updateManagers() {
+    return this.connection.query();
+  }
+  deleteEmployee() {
+    return this.connection.query();
+  }
 }

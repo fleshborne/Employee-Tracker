@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
 
 connection.connect(function (err) {
   if (err) throw err;
-  console.log(`connected at ${PORT}` + connection.threadId);
+  console.log(`Connected at port:${process.env.DB_PORT}`);
 });
 
 module.exports = connection;
