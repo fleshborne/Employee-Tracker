@@ -5,14 +5,14 @@ CREATE DATABASE employees;
 USE employees;
 
 -- create a departments table
-CREATE TABLE departments (
+CREATE TABLE department (
  id INT NOT NULL AUTO_INCREMENT,
  department_name VARCHAR(30) NOT NULL,   
  PRIMARY KEY (id)
  
 );
 -- create a roles table
-CREATE TABLE roles (
+CREATE TABLE role (
  id INT NOT NULL AUTO_INCREMENT,
  title VARCHAR(30) NOT NULL,
  salary DECIMAL(10,2),
@@ -20,7 +20,7 @@ CREATE TABLE roles (
  PRIMARY KEY(id)
 )
 
-CREATE TABLE employees (
+CREATE TABLE employee (
  id INT NOT NULL AUTO_INCREMENT,
  first_name VARCHAR(30) NOT NULL,
  last_name VARCHAR(30) NOT NULL,

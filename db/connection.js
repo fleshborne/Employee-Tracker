@@ -1,7 +1,6 @@
 // Dependencies here
 const mysql = require("mysql");
-const inquirer = require("inquirer");
-const consoleTable = require("console.table");
+const util = require("util");
 require("dotenv").config();
 
 const connection = mysql.createConnection({
@@ -13,9 +12,10 @@ const connection = mysql.createConnection({
   database: process.env.DB_NAME,
 });
 
-connection.connect(function (err) {
-  if (err) throw err;
-  console.log(`Connected at port:${process.env.DB_PORT}`);
-});
+connection.connect();
+
+// use the util here to allow for async/await syntax,
+// its good practice to always use promisify when possible
+connection.query = util.promisify(connection.query);
 
 module.exports = connection;
