@@ -6,7 +6,7 @@ const connection = require("./db/connection");
 const consoleTable = require("console.table");
 // create a prompt when the app is started
 // this will ask the user what they'd like to do
-mainPromptInq();
+
 async function mainPromptInq() {
   const { choice } = await prompt([
     {
@@ -31,8 +31,8 @@ async function mainPromptInq() {
           value: "View_All_Employees",
         },
         {
-          name: "View Employees by Department",
-          value: "View_Employees_by_Department",
+          name: "View Department",
+          value: "View_Department",
         },
         {
           name: "View Employees by Role",
@@ -52,53 +52,58 @@ async function mainPromptInq() {
   ]);
   switch (choice) {
     case "Add_Department":
-      return db.createDepartment();
+      return createDepartment();
 
     case "Add_Role":
-      return db.createRole();
+      return createRole();
 
     case "Add_Employee":
-      return db.createEmployee();
+      return createEmployee();
 
     case "View_All_Employees":
-      return db.getEmployee();
+      return getEmployee();
 
-    case "View_Employees_by_Department":
-      return db.getDepartment();
+    case "View_Department":
+      return getDepartment();
 
     case "View_Employees_by_Role":
-      return db.getRole();
+      return getRole();
 
     case "Update_Roles":
-      return db.updateRole();
+      return updateRole();
 
     case "Delete_Employee":
-      return db.deleteEmployee();
+      return deleteEmployee();
 
     case "Task_Completed":
       // code to exit here
       return connection.end();
   }
 }
+async function getEmployee() {
+  const employees = await db.getEmployee();
+  console.table(employees);
 
+  mainPromptInq();
+}
+
+async function getRole() {
+  const roles = await db.getRole();
+  console.table(roles);
+  mainPromptInq();
+}
+
+async function getDepartment() {
+  const department = await db.getDepartment();
+  console.table(department);
+  mainPromptInq();
+}
+mainPromptInq();
 //   console.log(answers);
 // use switch statements to traverse through different list options
 
 // dbData();
 
 // begin calling database functions
-async function getDepartment() {
-  const depotInfo = await db.getDepartment();
-  consoleTable(depotInfo);
-  mainPromptInq();
-}
-async function viewEmployees() {
-  const empInfo = await db.getEmployee();
-  consoleTable(empInfo);
-  mainPromptInq();
-}
-async function getRole() {
-  const roleInfo = await db.getRole();
-  consoleTable(roleInfo);
-  mainPromptInq();
-}
+
+// module.exports = index;
