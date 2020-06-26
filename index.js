@@ -35,6 +35,10 @@ async function mainPromptInq() {
           value: "View_Department",
         },
         {
+          name: "View Employees by Department",
+          value: "View_Employees_by_Department",
+        },
+        {
           name: "View Employees by Role",
           value: "View_Employees_by_Role",
         },

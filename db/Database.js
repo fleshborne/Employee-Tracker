@@ -42,10 +42,10 @@ class Database {
       }
     );
   }
-  updateRole(employeeId, roleId) {
+  updateRole(roleId, employeeId) {
     return this.connection.query(
       "UPDATE employee SET role_id = ? WHERE ID = ?",
-      [employeeId, roleId]
+      [roleId, employeeId]
     );
   }
   // deleteEmployee() {

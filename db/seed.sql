@@ -1,27 +1,33 @@
-use employees; 
+use employees;
 
-INSERT INTO department(id, department_name) VALUES (1, 'Sales');
-INSERT INTO department(id, department_name) VALUES (2, 'Engineering');
-INSERT INTO department(id, department_name) VALUES (3, 'Finance');
-INSERT INTO department(id, department_name) VALUES (4, 'Legal');
+INSERT INTO department
+    (name)
+VALUES
+    ('Sales'),
+    ('Engineering'),
+    ('Finance'),
+    ('Legal');
 
-INSERT INTO role(id ,title, salary, department_id) VALUES (1, 'Sales Lead', 100000, 1);
-INSERT INTO role(id ,title, salary, department_id) VALUES (2, 'Salesperson', 80000, 2);
-INSERT INTO role(id ,title, salary, department_id) VALUES (3, 'Lead Engineer', 150000, 3);
-INSERT INTO role(id ,title, salary, department_id) VALUES (4, 'Software Engineer', 120000, 4);
-INSERT INTO role(id ,title, salary, department_id) VALUES (5, 'Accountant', 80000, 5);
-INSERT INTO role(id ,title, salary, department_id) VALUES (6, 'Legal Team Lead', 250000, 6);
-INSERT INTO role(id ,title, salary, department_id) VALUES (7, 'Lawyer', 190000, 7);
+INSERT INTO role
+    (title, salary, department_id)
+VALUES
+    ('Sales Lead', 100000, 1),
+    ('Salesperson', 80000, 1),
+    ('Lead Engineer', 150000, 2),
+    ('Software Engineer', 120000, 2),
+    ('Account Manager', 160000, 3),
+    ('Accountant', 125000, 3),
+    ('Legal Team Lead', 250000, 4),
+    ('Lawyer', 190000, 4);
 
-INSERT INTO employee(id, first_name,last_name,role_id,manager_id) VALUES (1,"Blake", "Thompson", 3, NULL);
-INSERT INTO employee(id, first_name,last_name,role_id,manager_id) VALUES (2,"Ekalb", "Nospmoht", 4, 3);
-INSERT INTO employee(id, first_name,last_name,role_id,manager_id) VALUES (3,"Jarjar", "Binks", 1, NULL);
-INSERT INTO employee(id, first_name,last_name,role_id,manager_id) VALUES (4,"Han", "Solo", 2, 1);
-INSERT INTO employee(id, first_name,last_name,role_id,manager_id) VALUES (5,"Obiwan", "Kanobie", 5, NULL);
-INSERT INTO employee(id, first_name,last_name,role_id,manager_id) VALUES (6,"Qui-Gon", "Jin", 6, NULL);
-INSERT INTO employee(id, first_name,last_name,role_id,manager_id) VALUES (7,"Mace", "Windu", 7, 6);
-
--- INSERT INTO employee 
---     (first_name, last_name)
--- VALUES 
---     ('John', 'Doe')
+INSERT INTO employee
+    (first_name, last_name, role_id, manager_id)
+VALUES
+    ('Thompson', 'Blake', 1, NULL),
+    ("Ekalb", "Nospmoht", 2, 1),
+    ("Jarjar", "Binks", 3, NULL),
+    ("Han", "Solo", 4, 3),
+    ("Obiwan", "Kanobie", 5, NULL),
+    ("Qui-Gon", "Jin", 6, 5),
+    ("Mace", "Windu", 7, NULL),
+    ("Tom", "Allen", 8, 7);
