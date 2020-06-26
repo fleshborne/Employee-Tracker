@@ -1,6 +1,6 @@
 const connection = require("./connection");
-class Database {
-  constructor() {
+class DB {
+  constructor(connection) {
     this.connection = connection;
   }
   createDepartment(department) {
@@ -13,16 +13,8 @@ class Database {
     return this.connection.query("INSERT INTO role SET ?", role);
   }
   getDepartment() {
-    return this.connection.query("SELECT * FROM department", (err, results) => {
-      if (err) {
-        throw err;
-      }
-      console.table(results);
-    });
-  }
-  getEmployee() {
     return this.connection.query(
-      "SELECT employee.id, employee.first_name, employee.last_name,role.title, department.department_name AS department, role.salary, CONCAT(manager.first_name,'', manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;",
+      "SELECT department.id, department.name, SUM(role.salary) AS utilized_budget FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id GROUP BY department.id, department.name;",
       (err, results) => {
         if (err) {
           throw err;
@@ -31,9 +23,26 @@ class Database {
       }
     );
   }
+  getEmployee() {
+    return this.connection.query(
+      "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, '', manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;",
+      (err, results) => {
+        if (err) {
+          throw err;
+        }
+        console.table(results);
+      }
+    );
+  }
+  findAllEmployeesByDep(departmentId) {
+    return this.connection.query(
+      "SELECT employee.id, employee.first_name, employee.last_name, role.title FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department department on role.department_id = department.id WHERE department.id = ?;",
+      departmentId
+    );
+  }
   getRole() {
     return this.connection.query(
-      "SELECT role.id, role.title, department.department_name AS department, role.salary FROM role LEFT JOIN department ON role.department_id = department.id",
+      "SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department ON role.department_id = department.id",
       (err, results) => {
         if (err) {
           throw err;
@@ -53,4 +62,4 @@ class Database {
   // }
 }
 
-module.exports = new Database(connection);
+module.exports = new DB(connection);
